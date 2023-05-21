@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useMemo, useLayoutEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, useCursor } from '@react-three/drei'
 import { AsciiEffect } from 'three-stdlib'
+import { useGLTF } from "@react-three/drei";
 
 export default function App() {
   return (
@@ -11,7 +12,8 @@ export default function App() {
       <color attach="background" args={['black']} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
-      <Torusknot />
+      {/* <Torusknot /> */}
+      <CustomGLTF />
       <OrbitControls />
       <AsciiRenderer fgColor="white" bgColor="black" />
     </Canvas>
@@ -38,6 +40,43 @@ function Torusknot(props) {
   )
 }
 
+function CustomGLTF(props) {
+  //const gltf = useGLTF('./Avocado.gltf'); // Specify the location of your glTF file here
+  const gltf = useGLTF(process.env.PUBLIC_URL + '/model_caps.gltf');
+
+  const ref = useRef();
+  const [clicked, click] = useState(false);
+  const [hovered, hover] = useState(false);
+
+  useCursor(hovered);
+//  useFrame((state, delta) => (ref.current.rotation.x = ref.current.rotation.y += delta / 2));
+useEffect(() => {
+  if (ref.current) {
+    ref.current.rotation.x = Math.PI / 2; // Rotate 90 degrees around the Y-axis
+  //  ref.current.rotation.z = Math.PI / 0.5; // Rotate 90 degrees around the Y-axis  
+    ref.current.position.set(-2.7, 0, 0); // Center the object in the scene
+
+  }
+}, []);
+
+useFrame(({ clock }) => {
+  const elapsedTime = clock.getElapsedTime(); // Time since clock started in seconds
+  ref.current.rotation.z = Math.sin(elapsedTime) * 0.1; // Sway back and forth
+});
+
+  return (
+    <primitive
+      object={gltf.scene}
+      {...props}
+      ref={ref}
+      scale={clicked ? 1.5 : 1.25}
+      onClick={() => click(!clicked)}
+      onPointerOver={() => hover(true)}
+      onPointerOut={() => hover(false)}
+    />
+  )
+}
+
 function AsciiRenderer({
   renderIndex = 1,
   bgColor = 'black',
@@ -45,7 +84,7 @@ function AsciiRenderer({
   characters = ' .:-+*=%@#',
   invert = true,
   color = false,
-  resolution = 0.15
+  resolution = 0.2
 }) {
   // Reactive state
   const { size, gl, scene, camera } = useThree()
