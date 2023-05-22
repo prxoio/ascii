@@ -8,15 +8,20 @@ import { useGLTF } from "@react-three/drei";
 
 export default function App() {
   return (
-    <Canvas>
-      <color attach="background" args={['black']} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      {/* <Torusknot /> */}
-      <CustomGLTF />
-      <OrbitControls />
-      <AsciiRenderer fgColor="white" bgColor="black" />
-    </Canvas>
+    <div>
+      <div className="canvas-container">
+        <Canvas>
+          <color attach="background" args={['black']} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+          <pointLight position={[-10, -10, -10]} />
+          <Torusknot />
+          {/* <CustomGLTF /> */}
+          <OrbitControls />
+          <AsciiRenderer fgColor="white" bgColor="black" />
+        </Canvas>
+      </div>
+      <TerminalBar />
+    </div>
   )
 }
 
@@ -43,7 +48,7 @@ function Torusknot(props) {
 
 function CustomGLTF(props) {
   //const gltf = useGLTF('./Avocado.gltf'); // Specify the location of your glTF file here
-  const gltf = useGLTF(process.env.PUBLIC_URL + '/model_caps.gltf');
+  const gltf = useGLTF(process.env.PUBLIC_URL + '/model.gltf');
 
   const ref = useRef();
   const [clicked, click] = useState(false);
@@ -96,7 +101,7 @@ function AsciiRenderer({
   renderIndex = 1,
   bgColor = 'black',
   fgColor = 'white',
-  characters = ' .:-+*=%@#x',
+  characters = ' .:-+*=%@#',
   invert = true,
   color = false,
   resolution = 0.2
