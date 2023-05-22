@@ -42,7 +42,7 @@ function Torusknot(props) {
 
 function CustomGLTF(props) {
   //const gltf = useGLTF('./Avocado.gltf'); // Specify the location of your glTF file here
-  const gltf = useGLTF(process.env.PUBLIC_URL + '/model.gltf');
+  const gltf = useGLTF(process.env.PUBLIC_URL + '/model_caps.gltf');
 
   const ref = useRef();
   const [clicked, click] = useState(false);
