@@ -177,6 +177,12 @@ function ContactPage() {
             +443300431656 
           </a>
         </p>
+                <p>
+          pgp-public-key: 
+          <a href="/prxo-57491EFE.asc" download style={linkStyle}>
+          prxo-57491EFE.asc 
+          </a>
+        </p>
         <p></p>
       </div>
     </div>
