@@ -7,6 +7,8 @@ import { AsciiEffect } from 'three-stdlib'
 import { useGLTF } from "@react-three/drei";
 
 export default function App() {
+  const [showContact, setShowContact] = useState(false);
+
   return (
     <div>
       <div className="canvas-container">
@@ -20,7 +22,8 @@ export default function App() {
           <AsciiRenderer fgColor="white" bgColor="black" />
         </Canvas>
       </div>
-      <TerminalBar />
+      {showContact && <ContactPage />}
+      <TerminalBar onContactClick={() => setShowContact(!showContact)} />
     </div>
   )
 }
@@ -83,18 +86,17 @@ useFrame(({ clock }) => {
   )
 }
 
-function TerminalBar() {
+function TerminalBar({ onContactClick }) {
   return (
     <div className="terminal-bar">
       <div className="label">prxo.io</div>
       <div className="menu-links">
-      <div className="contact">contact</div>
-      {/* <div className="contact">About</div> */}
+        <div className="contact" onClick={onContactClick}>contact</div>
+        {/* <div className="contact">About</div> */}
       </div>
     </div>
   );
 }
-
 
 
 function AsciiRenderer({
@@ -104,7 +106,7 @@ function AsciiRenderer({
   characters = ' .:-+*=%@#',
   invert = true,
   color = false,
-  resolution = 0.2
+  resolution = 0.17
 }) {
   // Reactive state
   const { size, gl, scene, camera } = useThree()
@@ -146,4 +148,18 @@ function AsciiRenderer({
   }, renderIndex)
 
   // This component returns nothing, it is a purely logical
+}
+
+
+function ContactPage() {
+  return (
+    <div className="contact-page">
+      <div className="contact-content">
+        <p>prxo.io</p>
+        <p>email: admin@prxo.io</p>
+        <p>phone: +000000000</p>
+        <p></p>
+      </div>
+    </div>
+  );
 }
