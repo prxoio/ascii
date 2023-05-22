@@ -152,14 +152,34 @@ function AsciiRenderer({
 
 
 function ContactPage() {
+  const linkStyle = {
+    color: 'white',
+    textDecoration: 'none' // optional, to remove underline
+  };
+
   return (
     <div className="contact-page">
       <div className="contact-content">
-        <p>prxo.io</p>
-        <p>email: admin@prxo.io</p>
-        <p>phone: +000000000</p>
+        <p>
+          <a href="/prxo.io.vcf" download style={linkStyle}>
+            prxo.io.vcf
+          </a>
+        </p>
+        <p>
+          email: 
+          <a href="mailto:admin@prxo.io" style={linkStyle}>
+            admin@prxo.io
+          </a>
+        </p>
+        <p>
+          phone: 
+          <a href="https://api.whatsapp.com/send?phone=443300431656" style={linkStyle}>
+            +443300431656 
+          </a>
+        </p>
         <p></p>
       </div>
     </div>
   );
 }
+

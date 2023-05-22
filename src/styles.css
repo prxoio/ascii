@@ -37,7 +37,6 @@ body {
 
 .terminal-bar .label {
   margin-left: 10px;
-  font-weight: bold;
 }
 
 .terminal-bar .contact {
@@ -81,4 +80,10 @@ body {
   max-width: 800px;
   margin: auto;
   padding: 20px;
+}
+
+
+.contact-content a {
+  color: white;
+  text-decoration: none; /* optional, to remove underline */
 }
