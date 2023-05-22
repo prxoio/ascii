@@ -12,13 +12,14 @@ export default function App() {
       <color attach="background" args={['black']} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
-      <Torusknot />
-      {/* <CustomGLTF /> */}
+      {/* <Torusknot /> */}
+      <CustomGLTF />
       <OrbitControls />
       <AsciiRenderer fgColor="white" bgColor="black" />
     </Canvas>
   )
 }
+
 
 function Torusknot(props) {
   const ref = useRef()
@@ -34,7 +35,7 @@ function Torusknot(props) {
       onClick={() => click(!clicked)}
       onPointerOver={() => hover(true)}
       onPointerOut={() => hover(false)}>
-      <torusKnotGeometry args={[1, 0.2, 128, 32]} />
+      <torusKnotGeometry args={[1.2, 0.2, 128, 32]} />
       <meshStandardMaterial color="orange" />
     </mesh>
   )
@@ -76,6 +77,20 @@ useFrame(({ clock }) => {
     />
   )
 }
+
+function TerminalBar() {
+  return (
+    <div className="terminal-bar">
+      <div className="label">prxo.io</div>
+      <div className="menu-links">
+      <div className="contact">contact</div>
+      {/* <div className="contact">About</div> */}
+      </div>
+    </div>
+  );
+}
+
+
 
 function AsciiRenderer({
   renderIndex = 1,
