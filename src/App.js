@@ -16,7 +16,7 @@ export default function App() {
           <color attach="background" args={['black']} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
-          <Torusknot />
+          {/* <Torusknot /> */}
           {/* <CustomGLTF /> */}
           <OrbitControls />
           <AsciiRenderer fgColor="white" bgColor="black" />
