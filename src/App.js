@@ -4,10 +4,10 @@ import { useEffect, useRef, useState, useMemo, useLayoutEffect } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, useCursor } from '@react-three/drei'
 import { AsciiEffect } from 'three-stdlib'
-import { useGLTF } from "@react-three/drei";
+import { useGLTF } from '@react-three/drei'
 
 export default function App() {
-  const [showContact, setShowContact] = useState(false);
+  const [showContact, setShowContact] = useState(false)
 
   return (
     <div>
@@ -27,7 +27,6 @@ export default function App() {
     </div>
   )
 }
-
 
 function Torusknot(props) {
   const ref = useRef()
@@ -51,27 +50,26 @@ function Torusknot(props) {
 
 function CustomGLTF(props) {
   //const gltf = useGLTF('./Avocado.gltf'); // Specify the location of your glTF file here
-  const gltf = useGLTF(process.env.PUBLIC_URL + '/model.gltf');
+  const gltf = useGLTF(process.env.PUBLIC_URL + '/model.gltf')
 
-  const ref = useRef();
-  const [clicked, click] = useState(false);
-  const [hovered, hover] = useState(false);
+  const ref = useRef()
+  const [clicked, click] = useState(false)
+  const [hovered, hover] = useState(false)
 
-  useCursor(hovered);
-//  useFrame((state, delta) => (ref.current.rotation.x = ref.current.rotation.y += delta / 2));
-useEffect(() => {
-  if (ref.current) {
-    ref.current.rotation.x = Math.PI / 2; // Rotate 90 degrees around the Y-axis
-  //  ref.current.rotation.z = Math.PI / 0.5; // Rotate 90 degrees around the Y-axis  
-    ref.current.position.set(-2.7, 0, 0); // Center the object in the scene
+  useCursor(hovered)
+  //  useFrame((state, delta) => (ref.current.rotation.x = ref.current.rotation.y += delta / 2));
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.rotation.x = Math.PI / 2 // Rotate 90 degrees around the Y-axis
+      //  ref.current.rotation.z = Math.PI / 0.5; // Rotate 90 degrees around the Y-axis
+      ref.current.position.set(-2.7, 0, 0) // Center the object in the scene
+    }
+  }, [])
 
-  }
-}, []);
-
-useFrame(({ clock }) => {
-  const elapsedTime = clock.getElapsedTime(); // Time since clock started in seconds
-  ref.current.rotation.z = Math.sin(elapsedTime) * 0.1; // Sway back and forth
-});
+  useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime() // Time since clock started in seconds
+    ref.current.rotation.z = Math.sin(elapsedTime) * 0.1 // Sway back and forth
+  })
 
   return (
     <primitive
@@ -91,13 +89,14 @@ function TerminalBar({ onContactClick }) {
     <div className="terminal-bar">
       <div className="label">prxo.io</div>
       <div className="menu-links">
-        <div className="contact" onClick={onContactClick}>contact</div>
+        <div className="contact" onClick={onContactClick}>
+          contact
+        </div>
         {/* <div className="contact">About</div> */}
       </div>
     </div>
-  );
+  )
 }
-
 
 function AsciiRenderer({
   renderIndex = 1,
@@ -150,12 +149,11 @@ function AsciiRenderer({
   // This component returns nothing, it is a purely logical
 }
 
-
 function ContactPage() {
   const linkStyle = {
     color: 'white',
     textDecoration: 'none' // optional, to remove underline
-  };
+  }
 
   return (
     <div className="contact-page">
@@ -166,26 +164,19 @@ function ContactPage() {
           </a>
         </p>
         <p>
-          email: 
+          email:
           <a href="mailto:admin@prxo.io" style={linkStyle}>
             admin@prxo.io
           </a>
         </p>
         <p>
-          phone: 
-          <a href="https://api.whatsapp.com/send?phone=443300431656" style={linkStyle}>
-            +443300431656 
-          </a>
-        </p>
-                <p>
-          pgp-public-key: 
+          pgp-public-key:
           <a href="/prxo-57491EFE.asc" download style={linkStyle}>
-          prxo-57491EFE.asc 
+            prxo-57491EFE.asc
           </a>
         </p>
         <p></p>
       </div>
     </div>
-  );
+  )
 }
-
